@@ -163,14 +163,14 @@ define(['apphost', 'globalize', 'connectionManager', 'itemHelper', 'appRouter', 
                 id: 'copy-stream',
                 icon: 'content_copy'
             });
-        }
 
-        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            commands.push({
-                name: globalize.translate('OpenWithPotplayer'),
-                id: 'open-with-potplayer',
-                icon: 'play_arrow'
-            });
+            if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                commands.push({
+                    name: globalize.translate('OpenWithPotplayer'),
+                    id: 'open-with-potplayer',
+                    icon: 'play_arrow'
+                });
+            }
         }
 
         if (commands.length) {
