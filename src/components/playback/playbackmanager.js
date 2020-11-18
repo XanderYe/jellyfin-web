@@ -3808,6 +3808,14 @@ define(['events', 'datetime', 'appSettings', 'itemHelper', 'pluginManager', 'pla
         return null;
     };
 
+    PlaybackManager.prototype.getSupportedPlaybackRates = function (player = this._currentPlayer) {
+        player = player || self._currentPlayer;
+        if (player && player.getSupportedPlaybackRates) {
+            return player.getSupportedPlaybackRates();
+        }
+        return [];
+    };
+
     PlaybackManager.prototype.instantMix = function (item, player) {
 
         player = player || this._currentPlayer;

@@ -1671,6 +1671,31 @@ define(['browser', 'require', 'events', 'apphost', 'loading', 'dom', 'playbackMa
         return null;
     };
 
+    HtmlVideoPlayer.prototype.getSupportedPlaybackRates = function () {
+        return [{
+            name: '0.5x',
+            id: 0.5
+        }, {
+            name: '0.75x',
+            id: 0.75
+        }, {
+            name: '1x',
+            id: 1.0
+        }, {
+            name: '1.25x',
+            id: 1.25
+        }, {
+            name: '1.5x',
+            id: 1.5
+        }, {
+            name: '1.75x',
+            id: 1.75
+        }, {
+            name: '2x',
+            id: 2.0
+        }];
+    };
+
     HtmlVideoPlayer.prototype.setVolume = function (val) {
         var mediaElement = this._mediaElement;
         if (mediaElement) {

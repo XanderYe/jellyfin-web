@@ -86,6 +86,27 @@ function showRepeatModeMenu(player, btn) {
     });
 }
 
+function showPlaybackRateMenu(player, btn) {
+    // each has a name and id
+    const currentId = playbackManager.getPlaybackRate(player);
+    const menuItems = playbackManager.getSupportedPlaybackRates(player).map(i => ({
+        id: i.id,
+        name: i.name,
+        selected: i.id === currentId
+    }));
+
+    return actionsheet.show({
+        items: menuItems,
+        positionTo: btn
+    }).then(function (id) {
+        if (id) {
+            playbackManager.setPlaybackRate(id, player);
+            return Promise.resolve();
+        }
+        return Promise.reject();
+    });
+}
+
 function getQualitySecondaryText(player) {
     var state = playbackManager.getPlayerState(player);
     var isAutoEnabled = playbackManager.enableAutomaticBitrateDetection(player);
@@ -184,6 +205,17 @@ function showWithUser(options, player, user) {
         });
     }
 
+    if (supportedCommands.indexOf('PlaybackRate') !== -1) {
+        const currentPlaybackRateId = playbackManager.getPlaybackRate(player);
+        const currentPlaybackRate = playbackManager.getSupportedPlaybackRates(player).filter(i => i.id === currentPlaybackRateId)[0];
+
+        menuItems.push({
+            name: globalize.translate('PlaybackRate'),
+            id: 'playbackrate',
+            asideText: currentPlaybackRate ? currentPlaybackRate.name : null
+        });
+    }
+
     if (user && user.Policy.EnableVideoPlaybackTranscoding) {
         var secondaryQualityText = getQualitySecondaryText(player);
 
@@ -250,6 +282,8 @@ function handleSelectedOption(id, options, player) {
             return showAspectRatioMenu(player, options.positionTo);
         case 'repeatmode':
             return showRepeatModeMenu(player, options.positionTo);
+        case 'playbackrate':
+            return showPlaybackRateMenu(player, options.positionTo);
         case 'stats':
             if (options.onOption) {
                 options.onOption('stats');

@@ -165,6 +165,14 @@ define(['apphost', 'globalize', 'connectionManager', 'itemHelper', 'appRouter', 
             });
         }
 
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            commands.push({
+                name: globalize.translate('OpenWithPotplayer'),
+                id: 'open-with-potplayer',
+                icon: 'play_arrow'
+            });
+        }
+
         if (commands.length) {
             commands.push({
                 divider: true
@@ -356,6 +364,10 @@ define(['apphost', 'globalize', 'connectionManager', 'itemHelper', 'appRouter', 
                         }]);
                         getResolveFunction(getResolveFunction(resolve, id), id)();
                     });
+                    break;
+                case 'open-with-potplayer':
+                    var downloadHref = apiClient.getItemDownloadUrl(itemId);
+                    window.open('potplayer://' + downloadHref);
                     break;
                 case 'copy-stream':
                     var downloadHref = apiClient.getItemDownloadUrl(itemId);
