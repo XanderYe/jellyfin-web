@@ -383,6 +383,21 @@ define(['appSettings', 'browser', 'events'], function (appSettings, browser, eve
                         var currentReject = reject;
                         reject = null;
                         handleHlsJsMediaError(instance, currentReject);
+                        if (data.details === 'manifestIncompatibleCodecsError') {
+                            require(['alert', 'globalize', 'appRouter', 'loading'], function (alert, globalize, appRouter, loading) {
+                                loading.hide();
+                                alert({
+                                    text: globalize.translate('ErrorBrowserDecodeNotSupport'),
+                                    title: globalize.translate('HeaderError')
+                                }).then(function () {
+                                    var dlg = document.querySelector('.videoPlayerContainer');
+                                    if (dlg) {
+                                        dlg.remove();
+                                    }
+                                    document.querySelector('.page').classList.remove('hide');
+                                });
+                            });
+                        }
                         break;
                     default:
 

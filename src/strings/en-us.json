@@ -1567,5 +1567,6 @@
     "ButtonCast": "Cast",
     "ButtonPlayer": "Player",
     "StopPlayback": "Stop playback",
-    "ClearQueue": "Clear queue"
+    "ClearQueue": "Clear queue",
+    "ErrorBrowserDecodeNotSupport": "The video is not supported by the browser, please copy the stream url or open with potplayer"
 }

@@ -1580,5 +1580,6 @@
     "ClearQueue": "清空队列",
     "StopPlayback": "停止播放",
     "Writers": "作者",
-    "ViewAlbumArtist": "查看专辑艺术家"
+    "ViewAlbumArtist": "查看专辑艺术家",
+    "ErrorBrowserDecodeNotSupport": "浏览器不支持的格式，请复制串流地址播放或者使用Potplayer打开"
 }
