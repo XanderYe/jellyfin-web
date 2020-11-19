@@ -384,7 +384,7 @@ define(['appSettings', 'browser', 'events'], function (appSettings, browser, eve
                         reject = null;
                         handleHlsJsMediaError(instance, currentReject);
                         if (data.details === 'manifestIncompatibleCodecsError') {
-                            require(['alert', 'globalize', 'appRouter', 'loading'], function (alert, globalize, appRouter, loading) {
+                            require(['alert', 'globalize', 'appRouter', 'loading', 'viewManager'], function (alert, globalize, appRouter, loading, viewManager) {
                                 loading.hide();
                                 alert({
                                     text: globalize.translate('ErrorBrowserDecodeNotSupport'),
@@ -394,7 +394,7 @@ define(['appSettings', 'browser', 'events'], function (appSettings, browser, eve
                                     if (dlg) {
                                         dlg.remove();
                                     }
-                                    document.querySelector('.page').classList.remove('hide');
+                                    viewManager.currentView().classList.remove('hide');
                                 });
                             });
                         }
